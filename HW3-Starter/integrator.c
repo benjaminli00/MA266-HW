@@ -17,7 +17,7 @@ double integrate1(Range rng)
 
   for(int i = 0; i < rng.intervals; i++)
   {
-    sum += func(rng.lowerlimit + i) * sectionWidth;
+    sum += func(rng.lowerlimit + i * sectionWidth) * sectionWidth;
   }
 
   return sum;
