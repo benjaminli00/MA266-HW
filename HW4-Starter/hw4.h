@@ -16,7 +16,7 @@ double func5(double);
 // The type returns double and takes one double argument
 // It must be called "funcptr" and must not use any other name.
 
-typedef // ?????
+typedef double (* funcptr) (double);// ?????
 
   
 /* This is the second part to modify for this file */
@@ -31,7 +31,11 @@ typedef // ?????
 
 typedef struct
 {
-  // ?????
+  double upperlimit;
+  double lowerlimit;
+  int intervals;
+  double answer;
+  funcptr func;// ?????
 } Integration;
 
 
