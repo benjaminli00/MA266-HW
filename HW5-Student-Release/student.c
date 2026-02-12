@@ -36,11 +36,19 @@ int countNewLine(FILE * fptr)
 #ifdef TEST_READ
 bool StudentRead(char * filename, Student * * stu, int * numelem)
 {
+  //printf("\nStudent Read\n");
   /* 1.1: open the file to read */
   FILE * fptr;
   // the name of the file to open is stored in filename
   // if fopen fails, return false
   // do not use fclose since fopen already fails
+
+  fptr = fopen(filename, "r");
+
+  if (fptr == NULL)
+  {
+    return false;
+  }
   
   /* end of 1.1: open the file to read */
 	
@@ -58,9 +66,8 @@ bool StudentRead(char * filename, Student * * stu, int * numelem)
     {
       fclose (fptr);
       return false;
-    }
-  
-	
+    }  
+
   /* 1.2 allocate memory for the data */
   Student * stuptr;
   // stuptr is an array of type Student
@@ -68,6 +75,12 @@ bool StudentRead(char * filename, Student * * stu, int * numelem)
   // the number of elements in this array is numline
   // use the malloc function
   // check whether memory allocation fails
+  stuptr = malloc(numline * sizeof(Student));
+
+  if(stuptr == NULL)
+  {
+    return false;
+  }
   
   /* end of 1.2: allocate memory for the data */
 
@@ -78,6 +91,14 @@ bool StudentRead(char * filename, Student * * stu, int * numelem)
   // read the data from the file
   // store the data to the array stuptr
   // fclose the file after read of data is done
+
+
+  for(int i = 0; i < numline; i++)
+  {
+    fscanf(fptr, " %d %s", &stuptr[i].ID, stuptr[i].name);
+  }
+  
+  fclose(fptr);
 
   /* end of 1.3: allocate memory for the data */
 
@@ -95,6 +116,7 @@ bool StudentRead(char * filename, Student * * stu, int * numelem)
 #ifdef TEST_WRITE
 bool StudentWrite(char * filename, Student * stu, int numelem)
 {
+  // printf("\nStudent Write");
   // open the file to write
   // the name of file to open is stored in string filename
   // if fopen fails, return false
@@ -104,6 +126,20 @@ bool StudentWrite(char * filename, Student * stu, int numelem)
   // the number of elements in array stu is numelem
   // write the data from array stu to the opened file
   // fclose the file in the end
+
+  FILE * fptr = fopen(filename, "w");
+
+  if(fptr == NULL)
+  {
+    return false;
+  }
+
+  for(int i = 0; i < numelem; i++)
+  {
+    fprintf(fptr, "%d %s\n", stu[i].ID, stu[i].name);
+  }
+
+  fclose(fptr);
   
   return true;
 }
@@ -114,9 +150,12 @@ bool StudentWrite(char * filename, Student * stu, int numelem)
 /* This is the third function you need to implement */
 #ifdef TEST_QSORT
 void sortStudents(Student * stu, int numelem, int (*compar)(const void *, const void *)) {
+  //printf("\nsortStudents\n");
   /* Fill in to call qsort function to sort array stu */
   // stu: an array of Students. numelem: number of elements in the array. compar: comparison function
   // refer to hw5.h to understand the type Student
+
+  qsort(stu, numelem, sizeof(Student), compar);
 
 }
 #endif
@@ -127,10 +166,15 @@ void sortStudents(Student * stu, int numelem, int (*compar)(const void *, const 
 #ifdef TEST_SORTID
 int compareID(const void * p1, const void * p2)
 {
+  //printf("\ncompareID");
   /* Fill in to compare p1 and p2 by id */
   // return a negative value if the ID of the first student is smaller
   // return a positive value if the ID of the first student is larger
   // return zero if the IDs of the two students are the same
+  const Student * st1 = (const Student *) p1;
+  const Student * st2 = (const Student *) p2;
+
+  return st1->ID - st2->ID;
     
 }
 #endif
@@ -141,12 +185,16 @@ int compareID(const void * p1, const void * p2)
 #ifdef TEST_SORTNAME
 int compareName(const void * p1, const void * p2)
 {
+  //printf("\ncompareName");
   /* Fill in to compare p1 and p2 by name */
   // use strcmp function to compare two strings
   // return a negative value if the name of the first student is alphabetically earlier
   // return a positive value if the name of the first student is alphabetically later
   // return zero if the names of the two students are the same
-   
+  const Student * st1 = (const Student *) p1;
+  const Student * st2 = (const Student *) p2;
+
+  return strcmp(st1->name, st2->name);
 }
 #endif
 
@@ -159,6 +207,16 @@ bool areStudentsSorted(Student * stu, int numelem, int (*compar)(const void *, c
   // return true if the stu array is sorted according to compar
   // return false otherwise
   // refer to hw5.h to understand the type Student
+
+  for(int i = 0; i < numelem - 1; i++)
+  {
+    if(compar(&stu[i], &stu[i + 1]) > 0)
+    {
+      return false;
+    }
+  }
+
+  return true;
     
 }
 #endif
