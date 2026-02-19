@@ -14,12 +14,14 @@ int main(int argc, char **argv) {
   // argv[2]: output file name, sorted by ID
   // argv[3]: output file name, sorted by name
   if (argc < 4) {
+    printf("hey!");
     return EXIT_FAILURE;
   }
   
   Student *stu;
   int numelem;
   if (StudentRead(argv[1], &stu, &numelem) == false) {
+    printf("idk!");
     return EXIT_FAILURE;
   }
   
@@ -29,18 +31,22 @@ int main(int argc, char **argv) {
   // sort students by ID
   sortStudents(stu, numelem, compareID);
   if (!areStudentsSorted(stu, numelem, compareID)) {
+    printf("what!");
     return EXIT_FAILURE;
   }
   if (StudentWrite(argv[2], stu, numelem) == false) {
+    printf("yes!");
     return EXIT_FAILURE;
   }
 
   // sort students by name
   sortStudents(stu, numelem, compareName);
   if (!areStudentsSorted(stu, numelem, compareName)) {
+    printf("no!");
       return EXIT_FAILURE;
   }
   if (StudentWrite(argv[3], stu, numelem) == false) {
+    printf("okey!");
     return EXIT_FAILURE;
   }
   

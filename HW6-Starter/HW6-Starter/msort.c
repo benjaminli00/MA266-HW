@@ -25,6 +25,10 @@ void msort(Student * base, int nel, int (*compar)(const void *, const void *)) {
 	//so just return.
 
 	//FILL IN
+	if(nel <= 1)
+	{
+		return;
+	}
 	
 	//Inductive case: split the array in two, sort the two pieces with msort,
 	//merge the	sorted pieces
@@ -39,26 +43,33 @@ void msort(Student * base, int nel, int (*compar)(const void *, const void *)) {
 	//1. Find the midpoint of the array
 
 	//FILL IN
+	int mid = nel / 2;
 	
 	//2a. Sort the first half of the array (remember to adjust the # elements)
 
 	//FILL IN
+	msort(base, mid, compar);
 	
 	//2b. Sort the second half of the array. Pass in the address of the 
 	//beginning of the second half of the array (remember to use the right # of 
 	//elements)
 
 	//FILL IN
-	
+	msort(&base[mid], nel - mid, compar);
+
 	//3a. Merge the two arrays (use merge)
 
 	//FILL IN
+	Student * temp = merge(base, mid, &base[mid], nel - mid, compar);
 	
 	//3b. Copy the merged array over top of the original array (use copy)
 	//Don't forget to free the array you returned from merge -- you don't need it after the copy!
 
-	//FILL IN
-		
+	//FILL IN		
+	copy(base, temp, nel);
+
+	free(temp);
+
 	return;
 }
 #endif
@@ -84,18 +95,46 @@ Student * merge(Student * base1, int nel1, Student * base2, int nel2, int (*comp
 	//1. Allocate space for the returned merged array
 	
 	//FILL IN
+
+	Student * res = malloc(sizeof(Student) * (nel1 + nel2));
 	
 	//2. Create indices to keep track of where you are in the three arrays
 
 	//FILL IN
+	int merge_i = 0;
+	int left_i = 0;
+	int right_i = 0;
 	
 	//3. Go through base1 and base2, and merge them into the returned array
 
 	//FILL IN
+	int compare = 0;
+	while(left_i < nel1 || right_i < nel2)
+	{
+		compare = compar(&base1[left_i], &base2[right_i]);
+
+		if(left_i == nel1) //left completed
+		{
+			res[merge_i++] = base2[right_i++];
+		}
+		else if(right_i == nel2) //right completed
+		{
+			res[merge_i++] = base1[left_i++];
+		}
+		else if(compare <= 0)
+		{
+			res[merge_i++] = base1[left_i++];
+		}
+		else
+		{
+			res[merge_i++] = base2[right_i++];
+		}
+	}
 	
 	//4. Return the merged array
 
 	//FILL IN
+	return res;
 
 }
 
