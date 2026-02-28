@@ -23,9 +23,9 @@ test: $(EXEC)
 	echo "test finished"
 
 memory: $(EXEC)
-	$(VALGRIND) --log-file=memory/log4 ./hw7 4
-	$(VALGRIND) --log-file=memory/log8 ./hw7 8
-	$(VALGRIND) --log-file=memory/log11 ./hw7 11
+	$(VALGRIND) --log-file=memory/log1 ./hw7 4
+	$(VALGRIND) --log-file=memory/log2 ./hw7 8
+	$(VALGRIND) --log-file=memory/log3 ./hw7 11
 
 clean:
 	/bin/rm -f *.o
