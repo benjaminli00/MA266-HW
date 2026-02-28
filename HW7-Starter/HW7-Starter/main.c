@@ -9,12 +9,15 @@
 
 int main(int argc, char ** argv)
 {
+
+  //printf("started\n");
   char deck[MAX_SIZE] =
     {'A', '2', '3', '4', '5', '6', '7',
      '8', '9', 'T', 'J', 'Q', 'K'};
 
   if (argc != 2)
     {
+      printf("not enough arguments\n");
       return EXIT_FAILURE;
     }
 
