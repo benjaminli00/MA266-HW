@@ -4,6 +4,9 @@
 #include <stdlib.h>
 
 void pick(CardDeck, CardDeck, CardDeck, int, int);
+void shuffle (CardDeck origDeck, int round);
+void divide(CardDeck origDeck, CardDeck* leftDeck, CardDeck* rightDeck);
+void interleave(CardDeck leftDeck, CardDeck rightDeck, int round);
 
 // do NOT modify this function
 static void printDeck(CardDeck deck)
