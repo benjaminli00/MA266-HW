@@ -14,5 +14,7 @@ typedef struct {
 } CardDeck;
 
 void shuffle (CardDeck origDeck, int round);
+void divide(CardDeck origDeck, CardDeck* leftDeck, CardDeck* rightDeck);
+void interleave(CardDeck leftDeck, CardDeck rightDeck, int round);
 
 #endif
