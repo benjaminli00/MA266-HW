@@ -32,7 +32,65 @@ char * solveMaze(Maze * m) {
 bool depthFirstSolve(Maze * m, MazePos curpos, char * path, int step) {
 	
 	//FILL IN YOUR CODE HERE
+
+	//base case
+	//true base case
+	if(atEnd(curpos, m)) {
+		path[step] = '\0';
+		return true;		
+	}
+	//false base case
+	if(!squareOK(curpos, m)) {
+		return false;
+	}
+
+	m->maze[curpos.ypos][curpos.xpos].visited = true;
 	
+	//recursive case
+	//north
+	MazePos northPos = {
+		.xpos = curpos.xpos,
+		.ypos = curpos.ypos - 1
+	};
+	path[step] = NORTH;
+
+	if(depthFirstSolve(m, northPos, path, step + 1)) {
+		return true;
+	}
+	
+	//south
+	MazePos southPos = {
+		.xpos = curpos.xpos,
+		.ypos = curpos.ypos + 1
+	};
+	path[step] = SOUTH;
+
+	if(depthFirstSolve(m, southPos, path, step + 1)) {
+		return true;
+	}
+
+	//east
+	MazePos eastPos = {
+		.xpos = curpos.xpos + 1,
+		.ypos = curpos.ypos
+	};
+	path[step] = EAST;
+
+	if (depthFirstSolve(m, eastPos, path, step + 1)) {
+		return true;
+	}
+
+	//west
+	MazePos westPos = {
+		.xpos = curpos.xpos - 1,
+		.ypos = curpos.ypos
+	};
+	path[step] = WEST;
+
+	if (depthFirstSolve(m, westPos, path, step + 1)) {
+		return true;
+	}
+
 	return false;
 }
 
