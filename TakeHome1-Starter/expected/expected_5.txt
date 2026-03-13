@@ -1,0 +1,4 @@
+Sentences: 2
+Words: 17
+Syllables: 25
+Flesch Score: 73.8

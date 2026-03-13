@@ -1,0 +1,4 @@
+Sentences: 3
+Words: 13
+Syllables: 20
+Flesch Score: 72.3
