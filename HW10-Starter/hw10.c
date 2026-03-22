@@ -60,7 +60,7 @@ void eliminate(ListNode * head, int valk)
 {
   ListNode * nd = head;
   ListNode * prev = NULL;
-  while(head != NULL) {
+  while(head->next != NULL) {
     for(int i = 0; i < valk - 1; i++)
     {
       prev = nd;
@@ -92,6 +92,9 @@ void eliminate(ListNode * head, int valk)
     prev = NULL;
     free(p);
   }
+
+  printf("%d", head->value);
+  free(head);
 }
 #endif
 

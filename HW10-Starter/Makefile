@@ -30,4 +30,4 @@ valgrind: all
 clean:
 	rm -f $(EXEC)
 	rm -f *.o
-	rm -f output?
+	rm -f output? log?
