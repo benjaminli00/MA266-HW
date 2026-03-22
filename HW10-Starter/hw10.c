@@ -38,7 +38,7 @@ ListNode * createList(int valn)
     newHead = malloc(sizeof(ListNode));
 
     newHead->next = head;
-    newHead->value = valn--;
+    newHead->value = --valn;
     
     head = newHead;
   }
@@ -79,6 +79,8 @@ void eliminate(ListNode * head, int valk)
     ListNode * todelete = p;
     printListNode (todelete); 
 #endif
+
+    printf("%d\n", p->value);
 
     if(prev == NULL) {
       head = nd->next;
