@@ -4,6 +4,8 @@
 
 #ifndef _PATHS_H_
 #define _PATHS_H_
+#include <stdbool.h>
+#include <stdio.h>
 
 // Linked list node
 typedef struct PathNode {
