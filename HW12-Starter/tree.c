@@ -7,6 +7,10 @@
 #include <string.h>
 #include "tree.h"
 
+int indexOf(int * arr, int value, int size);
+TreeNode * buildRecurse(int * inArray, int * postArray, int size);
+TreeNode * createNode(int val);
+
 // DO NOT MODIFY FROM HERE --->>>
 void deleteTreeNode(TreeNode * tr)
 {
@@ -66,5 +70,59 @@ void preOrderToFile(Tree * tr, char * filename)
 // size: number of integers in inArray or postArray
 Tree * buildTree(int * inArray, int * postArray, int size)
 {
+  Tree * tree = malloc(sizeof(Tree));
+
+  tree->root = buildRecurse(inArray, postArray, size);
+  
+  return tree;
 }
 #endif
+
+int indexOf(int * arr, int value, int size) {
+  for(int i = 0; i < size; i++) {
+    if(arr[i] == value) {
+      return i;
+    }
+  }
+  
+  return -1;
+}
+
+TreeNode * buildRecurse(int * inArray, int * postArray, int size) {
+  if(size <= 0) {
+    return NULL;
+  }
+
+  int headVal = postArray[size - 1];
+  TreeNode * head = createNode(headVal);
+
+  if(size == 1) {
+    return head;
+  }
+
+  int splitI = indexOf(inArray, headVal, size);
+
+  if(splitI == -1) {
+    printf("failed to find value in array: %d\n", headVal);
+    return NULL;
+  }
+
+  TreeNode * leftTree = buildRecurse(inArray, postArray, splitI);
+
+  TreeNode * rightTree = buildRecurse(&inArray[splitI + 1], &postArray[splitI], size - splitI - 1);
+
+  head->left = leftTree;
+  head->right = rightTree;
+
+  return head;
+}
+
+TreeNode * createNode(int val) {
+  TreeNode * res = malloc(sizeof(TreeNode));
+
+  res->left = NULL;
+  res->right = NULL;
+  res->value = val;
+
+  return res;
+}
