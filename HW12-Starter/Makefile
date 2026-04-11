@@ -7,13 +7,10 @@ TESTFLAGS = -DTEST_BUILDTREE
 $(EXEC): main.c tree.c tree.h
 	$(GCC) -o $(EXEC) main.c tree.c
 
-%.o : %.c
-	$(GCC) -c $<
-
 test%: $(EXEC)
 	./$(EXEC) testcases/test$*in testcases/test$*post output$*
 	diff -w output$* expected/expected$*
-	echo "test$* passed!"
+	echo "test$* passed!\n"
 
 
 clean:
