@@ -26,7 +26,7 @@ void freeHuffmanTree(TreeNode *ptr);
 
 /* given a huffman coding tree, print the huffman code for each ASCII    */
 /* symbol                                                                */
-void huffmanPrint(TreeNode *ptr, FILE * fp);
+void huffmanPrint(const TreeNode *ptr, FILE * fp);
 
 /* is a given TreeNode a leaf node                                       */
 int isLeafNode(const TreeNode *node);

@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "huffman.h"
 
-void traverseTreePrint(TreeNode * tree, FILE * fp, char * code, int depth);
+void traverseTreePrint(const TreeNode * tree, FILE * fp, char * code, int depth);
 
 /* construct a new tree, with the new label, and left and right branches */
 /* get the count from left and right for the new count                   */
@@ -32,13 +32,13 @@ void freeHuffmanTree(TreeNode * ptr){
 
 /* given a huffman coding tree, print the huffman code for each ASCII    */
 /* symbol                                                                */
-void huffmanPrint(TreeNode * ptr, FILE * fp){
+void huffmanPrint(const TreeNode * ptr, FILE * fp){
     char code[ASCII_SIZE];
 
     traverseTreePrint(ptr, fp, code, 0);
 }
 
-void traverseTreePrint(TreeNode * tree, FILE * fp, char * code, int depth) {
+void traverseTreePrint(const TreeNode * tree, FILE * fp, char * code, int depth) {
     // base case: null
     if(tree == NULL) {
         return;
