@@ -90,11 +90,11 @@ TreeNode * buildHuffmanTree(ListNode * list){
         return NULL;
     }
 
-    ListNode * lastNode;
+    //ListNode * lastNode;
 
     while(list->next != NULL){
         TreeNode * combineTree = buildTreeNode(126, list->ptr, list->next->ptr);
-        lastNode = addListNode(&list, combineTree, treeNodeCompare);
+        addListNode(&list, combineTree, treeNodeCompare);
 
         free(removeListNode(&list));
         free(removeListNode(&list));
@@ -110,9 +110,11 @@ TreeNode * buildHuffmanTree(ListNode * list){
     //     return combineTree;
     // }
 
-    free(lastNode);
+    TreeNode * res = list->ptr;
 
-    return list->ptr;
+    free(list);
+
+    return res;
 }
 
 //place new treenode to list and delete first 2 elements. Returns ptr to new element

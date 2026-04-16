@@ -16,11 +16,6 @@ typedef struct ListNode {
    struct ListNode *next;
 } ListNode;
 
-typedef struct {
-   int count;
-   unsigned char buffer;
-} Buffer;
-
 /* construct a new tree, with the new label, and left and right branches */
 /* get the count from left and right for the new count                   */
 TreeNode *buildTreeNode(int label, TreeNode *left, TreeNode *right);

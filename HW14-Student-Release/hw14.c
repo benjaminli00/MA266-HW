@@ -213,7 +213,6 @@ int main(int argc, char **argv)
    //free
    freeHuffmanTree(huffman);
    free(buff);
-   free(list);
    free(asciiCount);
 
    return EXIT_SUCCESS;
