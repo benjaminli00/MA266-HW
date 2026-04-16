@@ -3,6 +3,11 @@
 #include <stdint.h> 
 #include "huffman.h"
 
+typedef struct {
+   int count;
+   unsigned char buffer;
+} Buffer;
+
 /* count the occurrences in a file */
 
 long *countLetters(FILE *fp)
