@@ -5,8 +5,8 @@
 CFLAGS = -std=c99 -g -Wall -Wshadow --pedantic -Wvla -Werror
 GCC = gcc $(CFLAGS)
 EXEC = hw14
-OBJS = hw14.o
-VALGRIND = valgrind --tool=memcheck --leak-check=yes --verbose
+OBJS = hw14.o huffman.o
+VALGRIND = valgrind --tool=memcheck --leak-check=full --verbose --leak-check=full --show-leak-kinds=all
 
 $(EXEC): $(OBJS) huffman.h
 	$(GCC) $(OBJS) -o $(EXEC)
@@ -17,6 +17,30 @@ test: $(EXEC)
 	./$(EXEC) testcases/woods woods_sorted woods_huffman woods_header
 	./$(EXEC) testcases/para para_sorted para_huffman para_header
 	./$(EXEC) testcases/prideandprejudice prideandprejudice_sorted prideandprejudice_huffman prideandprejudice_header
+
+check_sorted: test
+	diff -u expected/basic_sorted basic_sorted
+	diff -u expected/gophers_sorted gophers_sorted
+	diff -u expected/para_sorted para_sorted
+	diff -u expected/prideandprejudice_sorted prideandprejudice_sorted
+	diff -u expected/woods_sorted woods_sorted
+	echo "sorted works properly"
+
+check_huffman: test
+	diff -u expected/basic_huffman basic_huffman
+	diff -u expected/gophers_huffman gophers_huffman
+	diff -u expected/para_huffman para_huffman
+	diff -u expected/prideandprejudice_huffman prideandprejudice_huffman
+	diff -u expected/woods_huffman woods_huffman
+	echo "huffman works properly"
+
+check_header: test
+	cmp expected/basic_header basic_header
+	cmp expected/gophers_header gophers_header
+	cmp expected/para_header para_header
+	cmp expected/prideandprejudice_header prideandprejudice_header
+	cmp expected/woods_header woods_header
+	echo "header works properly"
 
 check: test
 	diff -u expected/basic_sorted basic_sorted

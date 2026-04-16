@@ -5,7 +5,7 @@
 
 
 typedef struct TreeNode {
-   int label;
+   int label; //ASCII# for leaf, -1 for tree
    long count;
    struct TreeNode *left;
    struct TreeNode *right;
@@ -15,6 +15,11 @@ typedef struct ListNode {
    TreeNode *ptr;
    struct ListNode *next;
 } ListNode;
+
+typedef struct {
+   int count;
+   unsigned char buffer;
+} Buffer;
 
 /* construct a new tree, with the new label, and left and right branches */
 /* get the count from left and right for the new count                   */
@@ -26,7 +31,7 @@ void freeHuffmanTree(TreeNode *ptr);
 
 /* given a huffman coding tree, print the huffman code for each ASCII    */
 /* symbol                                                                */
-void huffmanPrint(const TreeNode *ptr, FILE * fp);
+void huffmanPrint(TreeNode *ptr, FILE * fp);
 
 /* is a given TreeNode a leaf node                                       */
 int isLeafNode(const TreeNode *node);
