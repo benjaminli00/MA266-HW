@@ -5,10 +5,10 @@
 CFLAGS = -std=c99 -g -Wall -Wshadow --pedantic -Wvla -Werror
 GCC = gcc $(CFLAGS)
 EXEC = hw14
-OBJS = hw14.o huffman.o
+OBJS = hw14.o
 VALGRIND = valgrind --tool=memcheck --leak-check=full --verbose --leak-check=full --show-leak-kinds=all
 
-$(EXEC): $(OBJS) huffman.h
+$(EXEC): $(OBJS)
 	$(GCC) $(OBJS) -o $(EXEC)
 
 test: $(EXEC)
