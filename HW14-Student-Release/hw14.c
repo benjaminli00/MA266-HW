@@ -178,6 +178,7 @@ ListNode * addListNode(ListNode ** list, TreeNode * new_object,
     
     ListNode * newNode = malloc(sizeof(ListNode));
     newNode->ptr = new_object;
+    newNode->next = NULL;
 
     // if(!cmpFunction(new_object, (*list)->ptr)){
     //     newNode->next = *list;
